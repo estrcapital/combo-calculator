@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0f172a" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <title>Combo Calculator | ESTR Capital</title>
+    <title>Combo Calculator LTF | ESTR Capital</title>
     
     <!-- Tailwind CSS Play CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -63,13 +63,13 @@
       }
     </style>
   </head>
-  <body class="bg-[#0f172a] text-[#f8fafc] selection:bg-sky-500/30">
+  <body class="bg-[#0f172a] text-[#f8fafc] selection:bg-emerald-500/30">
     <div id="app" class="min-h-screen flex flex-col items-center py-12 px-4 relative">
       <!-- Switch Button -->
       <div class="absolute top-6 right-6 z-50">
-        <a href="ltf.html" class="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full border border-[#334155] transition-all text-xs font-bold uppercase tracking-widest active:scale-95">
+        <a href="index.html" class="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full border border-[#334155] transition-all text-xs font-bold uppercase tracking-widest active:scale-95">
           <i data-lucide="layers" class="w-4 h-4"></i>
-          Switch to LTF
+          Switch to STF
         </a>
       </div>
 
@@ -78,47 +78,47 @@
         <!-- Header -->
         <div class="flex flex-col items-center mb-12">
           <div class="flex items-center justify-center gap-3 mb-2">
-            <div class="p-3 bg-sky-500/10 rounded-2xl border border-sky-500/20 shadow-[0_0_20px_rgba(56,189,248,0.1)]">
+            <div class="p-3 bg-emerald-500/10 rounded-2xl border border-emerald-500/20 shadow-[0_0_20px_rgba(16,185,129,0.1)]">
               <!-- Stock Market Logo SVG -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-sky-400">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400">
                 <path d="M3 3v18h18"/>
                 <path d="m19 9-5 5-4-4-3 3"/>
               </svg>
             </div>
             <h1 class="text-[28px] font-bold tracking-tight text-[#f8fafc]">
-              Combo <span class="text-sky-400">Calculator</span>
+              Combo <span class="text-emerald-400">Calculator</span>
             </h1>
           </div>
-          <div class="text-sky-400/60 text-xl font-black tracking-[0.4em] uppercase">STF</div>
+          <div class="text-emerald-400/60 text-xl font-black tracking-[0.4em] uppercase">LTF</div>
         </div>
 
         <!-- Main Card -->
         <div class="bg-[#1e293b] rounded-[24px] p-8 md:p-12 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] border border-[#334155] backdrop-blur-sm relative overflow-hidden mb-8">
-          <div class="absolute -top-24 -right-24 w-48 h-48 bg-sky-500/5 blur-3xl rounded-full"></div>
-          <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-sky-500/5 blur-3xl rounded-full"></div>
+          <div class="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/5 blur-3xl rounded-full"></div>
+          <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-emerald-500/5 blur-3xl rounded-full"></div>
 
           <div class="relative z-10">
             <div class="grid grid-cols-2 gap-[20px] mb-8">
               <div class="space-y-2">
                 <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">EMA 5</label>
-                <input type="number" id="input-0" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-sky-400 transition-colors placeholder:text-slate-600">
+                <input type="number" id="input-0" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-emerald-400 transition-colors placeholder:text-slate-600">
               </div>
               <div class="space-y-2">
                 <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">EMA 13</label>
-                <input type="number" id="input-1" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-sky-400 transition-colors placeholder:text-slate-600">
+                <input type="number" id="input-1" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-emerald-400 transition-colors placeholder:text-slate-600">
               </div>
               <div class="space-y-2">
                 <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">EMA 21</label>
-                <input type="number" id="input-2" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-sky-400 transition-colors placeholder:text-slate-600">
+                <input type="number" id="input-2" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-emerald-400 transition-colors placeholder:text-slate-600">
               </div>
               <div class="space-y-2">
                 <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">EMA 34</label>
-                <input type="number" id="input-3" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-sky-400 transition-colors placeholder:text-slate-600">
+                <input type="number" id="input-3" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-emerald-400 transition-colors placeholder:text-slate-600">
               </div>
             </div>
 
             <div class="flex gap-3">
-              <button id="calculate-btn" class="flex-1 flex items-center justify-center gap-2 py-4 bg-sky-400 hover:bg-sky-300 text-[#0f172a] rounded-[12px] font-bold text-base transition-all shadow-lg shadow-sky-500/20 active:scale-[0.98]">
+              <button id="calculate-btn" class="flex-1 flex items-center justify-center gap-2 py-4 bg-emerald-400 hover:bg-emerald-300 text-[#0f172a] rounded-[12px] font-bold text-base transition-all shadow-lg shadow-emerald-500/20 active:scale-[0.98]">
                 <i data-lucide="calculator" class="w-5 h-5"></i>
                 Calculate Results
               </button>
@@ -135,11 +135,11 @@
           <div class="bg-[#0f172a] border border-[#334155] border-dashed rounded-[12px] p-6 relative group">
             <div class="flex items-center justify-between mb-2">
               <span class="text-[12px] uppercase tracking-[0.05em] font-semibold text-[#94a3b8] mx-auto">RESULT</span>
-              <button id="copy-result-btn" class="absolute right-4 top-4 text-sky-400 hover:text-sky-300 transition-colors p-1">
+              <button id="copy-result-btn" class="absolute right-4 top-4 text-emerald-400 hover:text-emerald-300 transition-colors p-1">
                 <i data-lucide="copy" class="w-4 h-4" id="copy-icon"></i>
               </button>
             </div>
-            <div id="result-display" class="text-2xl font-bold tracking-[0.05em] text-sky-400 text-center"></div>
+            <div id="result-display" class="text-2xl font-bold tracking-[0.05em] text-emerald-400 text-center"></div>
           </div>
         </div>
 
@@ -189,8 +189,8 @@
       // State Management
       let history = [];
       const FIB_VALUES = [5, 13, 21, 34];
-      const STORAGE_KEY = 'combo_calc_history_stf';
-      const RESULT_KEY = 'combo_calc_last_result_stf';
+      const STORAGE_KEY = 'combo_calc_history_ltf';
+      const RESULT_KEY = 'combo_calc_last_result_ltf';
 
       // DOM Elements
       const inputElements = [
@@ -220,7 +220,7 @@
             console.error('Failed to load history', e);
           }
         }
-        
+
         const lastResult = localStorage.getItem(RESULT_KEY);
         if (lastResult) {
           resultDisplay.textContent = lastResult;
@@ -245,16 +245,16 @@
         historyCount.textContent = `${history.length} Records`;
         
         historyBody.innerHTML = history.map(item => `
-          <tr class="group hover:bg-sky-500/5 transition-colors border-b border-[#334155]/50 last:border-0">
+          <tr class="group hover:bg-emerald-500/5 transition-colors border-b border-[#334155]/50 last:border-0">
             <td class="px-4 py-4 font-mono text-xs text-slate-400">
               ${item.inputs.join(' | ')}
             </td>
-            <td class="px-4 py-4 font-bold text-sky-400 tracking-wide">
+            <td class="px-4 py-4 font-bold text-emerald-400 tracking-wide">
               ${item.result.join(', ')}
             </td>
             <td class="px-4 py-4 text-right">
               <div class="flex justify-end gap-2">
-                <button onclick="copyText('${item.result.join(', ')}')" class="p-2 text-slate-500 hover:text-sky-400 transition-colors" title="Copy Result">
+                <button onclick="copyText('${item.result.join(', ')}')" class="p-2 text-slate-500 hover:text-emerald-400 transition-colors" title="Copy Result">
                   <i data-lucide="copy" class="w-4 h-4"></i>
                 </button>
                 <button onclick="deleteRow('${item.id}')" class="p-2 text-slate-500 hover:text-red-400 transition-colors" title="Delete Row">
@@ -361,4 +361,3 @@
     </script>
   </body>
 </html>
-
