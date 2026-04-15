@@ -89,19 +89,19 @@
           <div class="relative z-10">
             <div class="grid grid-cols-2 gap-[20px] mb-8">
               <div class="space-y-2">
-                <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">Input 1</label>
+                <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">EMA 5</label>
                 <input type="number" id="input-0" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-sky-400 transition-colors placeholder:text-slate-600">
               </div>
               <div class="space-y-2">
-                <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">Input 2</label>
+                <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">EMA 13</label>
                 <input type="number" id="input-1" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-sky-400 transition-colors placeholder:text-slate-600">
               </div>
               <div class="space-y-2">
-                <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">Input 3</label>
+                <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">EMA 21</label>
                 <input type="number" id="input-2" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-sky-400 transition-colors placeholder:text-slate-600">
               </div>
               <div class="space-y-2">
-                <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">Input 4</label>
+                <label class="text-[12px] uppercase tracking-widest font-semibold text-[#94a3b8] ml-1">EMA 34</label>
                 <input type="number" id="input-3" placeholder="0" class="input-field w-full bg-[#0f172a] border border-[#334155] text-white px-4 py-[14px] rounded-[12px] font-sans text-base focus:outline-none focus:border-sky-400 transition-colors placeholder:text-slate-600">
               </div>
             </div>
@@ -143,7 +143,7 @@
               <table class="w-full text-left border-collapse">
                 <thead>
                   <tr class="bg-[#0f172a]/50 text-[11px] uppercase tracking-wider text-[#94a3b8] font-bold">
-                    <th class="px-4 py-3 border-b border-[#334155]">Inputs (1-4)</th>
+                    <th class="px-4 py-3 border-b border-[#334155]">EMA Inputs</th>
                     <th class="px-4 py-3 border-b border-[#334155]">Result Sequence</th>
                     <th class="px-4 py-3 border-b border-[#334155] text-right">Actions</th>
                   </tr>
@@ -258,15 +258,16 @@
           return;
         }
 
-        const indexed = values.map((val, idx) => ({ val, idx }));
+        // Map inputs to their respective EMA values
+        const indexed = values.map((val, idx) => ({ val, fib: FIB_VALUES[idx] }));
+        
+        // Sort by input value descending
         const sorted = [...indexed].sort((a, b) => b.val - a.val);
         
-        const resultsMap = new Array(4);
-        sorted.forEach((item, rank) => {
-          resultsMap[item.idx] = FIB_VALUES[rank];
-        });
-
-        const resultStr = resultsMap.join(', ');
+        // Extract the EMA values in the new sorted order
+        const resultSequence = sorted.map(item => item.fib);
+        const resultStr = resultSequence.join(', ');
+        
         resultDisplay.textContent = resultStr;
         resultContainer.classList.remove('hidden');
 
@@ -274,7 +275,7 @@
         const newItem = {
           id: Math.random().toString(36).substr(2, 9),
           inputs: values.map(v => v.toString()),
-          result: resultsMap,
+          result: resultSequence,
           timestamp: Date.now()
         };
         
