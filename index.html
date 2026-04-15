@@ -190,22 +190,28 @@
         </div>
 
         <div class="grid gap-6">
-          <!-- STF Summary -->
-          <div class="bg-[#1e293b] rounded-[24px] p-8 border border-[#334155] relative overflow-hidden">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-sky-400 font-bold uppercase tracking-widest text-sm">STF Result</h3>
-              <button onclick="copyResult('stf')" class="text-sky-400/50 hover:text-sky-400 transition-colors"><i data-lucide="copy" class="w-4 h-4"></i></button>
-            </div>
-            <div id="combo-stf-display" class="text-3xl font-bold text-sky-400 tracking-wider">No Data</div>
+          <!-- Combo Number Display -->
+          <div class="bg-white/5 rounded-[24px] p-8 border border-white/10 relative overflow-hidden text-center mb-4">
+            <div class="text-white/40 text-[12px] uppercase tracking-[0.2em] font-bold mb-2">Detected Combo</div>
+            <div id="combo-number-display" class="text-6xl font-black text-white tracking-tighter">--</div>
           </div>
 
           <!-- LTF Summary -->
           <div class="bg-[#1e293b] rounded-[24px] p-8 border border-[#334155] relative overflow-hidden">
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-emerald-400 font-bold uppercase tracking-widest text-sm">LTF Result</h3>
-              <button onclick="copyResult('ltf')" class="text-emerald-400/50 hover:text-emerald-400 transition-colors"><i data-lucide="copy" class="w-4 h-4"></i></button>
+              <button onclick="copyResult('ltf')" class="text-emerald-400/50 hover:text-emerald-400 transition-colors"><i data-lucide="copy" class="w-4 h-4" id="combo-ltf-copy-icon"></i></button>
             </div>
             <div id="combo-ltf-display" class="text-3xl font-bold text-emerald-400 tracking-wider">No Data</div>
+          </div>
+
+          <!-- STF Summary -->
+          <div class="bg-[#1e293b] rounded-[24px] p-8 border border-[#334155] relative overflow-hidden">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-sky-400 font-bold uppercase tracking-widest text-sm">STF Result</h3>
+              <button onclick="copyResult('stf')" class="text-sky-400/50 hover:text-sky-400 transition-colors"><i data-lucide="copy" class="w-4 h-4" id="combo-stf-copy-icon"></i></button>
+            </div>
+            <div id="combo-stf-display" class="text-3xl font-bold text-sky-400 tracking-wider">No Data</div>
           </div>
         </div>
       </div>
@@ -293,27 +299,76 @@
         localStorage.removeItem(`combo_calc_last_result_${type}`);
       }
 
+      let combosData = null;
+
+      async function loadCombosData() {
+        try {
+          const response = await fetch('combos_576.json');
+          if (response.ok) {
+            combosData = await response.json();
+            updateComboView();
+          }
+        } catch (error) {
+          console.error('Error loading combos data:', error);
+        }
+      }
+
       function updateComboView() {
         const stf = localStorage.getItem('combo_calc_last_result_stf') || 'No Data';
         const ltf = localStorage.getItem('combo_calc_last_result_ltf') || 'No Data';
         
         document.getElementById('combo-stf-display').textContent = stf;
         document.getElementById('combo-ltf-display').textContent = ltf;
+
+        const comboDisplay = document.getElementById('combo-number-display');
+        if (!comboDisplay) return;
+
+        if (stf !== 'No Data' && ltf !== 'No Data' && combosData) {
+          const stfArray = stf.split(', ').map(Number);
+          const ltfArray = ltf.split(', ').map(Number);
+
+          const match = combosData.find(c => {
+            const stfMatch = JSON.stringify(c.stf) === JSON.stringify(stfArray);
+            const ltfMatch = JSON.stringify(c.ltf) === JSON.stringify(ltfArray);
+            return stfMatch && ltfMatch;
+          });
+
+          if (match) {
+            comboDisplay.textContent = match.combo;
+            comboDisplay.classList.remove('opacity-20');
+          } else {
+            comboDisplay.textContent = 'N/A';
+            comboDisplay.classList.add('opacity-20');
+          }
+        } else {
+          comboDisplay.textContent = '--';
+          comboDisplay.classList.add('opacity-20');
+        }
       }
 
       function copyResult(type) {
         const text = localStorage.getItem(`combo_calc_last_result_${type}`);
         if (text) {
           navigator.clipboard.writeText(text);
-          const icon = document.getElementById(`${type}-copy-icon`);
-          if (icon) {
+          
+          // Update icons in both the main view and combo view if they exist
+          const icons = [
+            document.getElementById(`${type}-copy-icon`),
+            document.getElementById(`combo-${type}-copy-icon`)
+          ].filter(icon => icon !== null);
+
+          icons.forEach(icon => {
             icon.setAttribute('data-lucide', 'check');
-            lucide.createIcons();
-            setTimeout(() => {
+          });
+          
+          lucide.createIcons();
+          
+          setTimeout(() => {
+            icons.forEach(icon => {
               icon.setAttribute('data-lucide', 'copy');
-              lucide.createIcons();
-            }, 2000);
-          }
+            });
+            lucide.createIcons();
+          }, 2000);
         }
       }
 
@@ -335,6 +390,7 @@
       });
 
       // Initial Load
+      loadCombosData();
       ['stf', 'ltf'].forEach(type => {
         const last = localStorage.getItem(`combo_calc_last_result_${type}`);
         if (last) {
